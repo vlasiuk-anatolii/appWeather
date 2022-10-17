@@ -1,0 +1,15 @@
+.footer {
+  background-color: $light-grey;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__text {
+
+    @extend %input;
+    color: $color-text-footer;
+    text-align: center;
+  }
+}

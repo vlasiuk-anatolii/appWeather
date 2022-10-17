@@ -1,0 +1,13 @@
+.active_arrow {
+  background-image: url('../images/arrow-down.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(180deg);
+  transition: $transition-duration ease-out;
+  margin: 0 auto 25px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,40 @@
+.card {
+  margin: 20px;
+
+  &__images {
+    width: 220px;
+    height: 220px;
+    background-color: $main-powderblue;
+    background-repeat: no-repeat;
+    background-position: 10px 20px;
+    background-size: 90%;
+    border-radius: 30px;
+    border: 1px solid #2a344b;
+  }
+
+  &__button {
+    position: relative;
+
+    @extend %input;
+    width: 200px;
+    height: 36px;
+    top: 172px;
+    left: 9px;
+    background-color: $bg-main;
+    border-radius: 50px;
+    margin-bottom: 17px;
+    transition-duration: $transition-duration;
+    border: 1px solid transparent;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $main-blue;
+      -webkit-box-shadow: $shadow-button;
+      -moz-box-shadow: $shadow-button;
+      box-shadow: $shadow-button;
+      border: 1px solid transparent;
+      color: $bg-main;
+      border: 1px solid $main-nightblue;
+    }
+  }
+}
