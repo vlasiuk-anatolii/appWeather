@@ -16,6 +16,7 @@
     position: relative;
 
     @extend %input;
+
     width: 200px;
     height: 36px;
     top: 172px;
@@ -29,10 +30,7 @@
     &:hover {
       cursor: pointer;
       background-color: $main-blue;
-      -webkit-box-shadow: $shadow-button;
-      -moz-box-shadow: $shadow-button;
       box-shadow: $shadow-button;
-      border: 1px solid transparent;
       color: $bg-main;
       border: 1px solid $main-nightblue;
     }

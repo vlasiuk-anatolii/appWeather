@@ -11,6 +11,7 @@
     margin: 0 auto 35px;
 
     @extend %h1;
+
     padding: 70px 40px 35px;
     max-width: 670px;
     text-align: center;
@@ -25,8 +26,8 @@
   }
 
   &__subtitle {
-
     @extend %input;
+
     color: $main-black;
     text-align: left;
     padding: 15px 20px;
@@ -34,7 +35,7 @@
 
   &__arrow_box {
     display: inline;
-    background-image: url('../images/arrow-down.svg');
+    background-image: url("../images/arrow-down.svg");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -42,20 +43,20 @@
     height: 17px;
     transition: $transition-duration;
     float: right;
-    
+
     &:hover {
       cursor: pointer;
     }
   }
 
   &__panel-answer {
-
     @extend %input;
+
     color: $main-black;
     text-align: left;
     background-color: $light-grey;
     border-radius: 20px;
-    margin: 0px auto;
+    margin: 0 auto;
     border: 1px solid $light-grey;
     max-width: 1000px;
     padding: 0 20px;
@@ -64,4 +65,3 @@
     transition: max-height $transition-duration ease-out;
   }
 }
-

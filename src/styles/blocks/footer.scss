@@ -7,8 +7,8 @@
   align-items: center;
 
   &__text {
-
     @extend %input;
+
     color: $color-text-footer;
     text-align: center;
   }

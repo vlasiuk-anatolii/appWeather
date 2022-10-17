@@ -7,7 +7,7 @@ const nightFrom = 21;
 const nightTo = 6;
 
 const acc = document.getElementsByClassName('accordion');
-accord(acc, 'active_arrow');
+accord(acc, 'active-arrow');
 
 const input = document.getElementById('search');
 
@@ -30,7 +30,7 @@ const currentTime = new Date();
 const currentHours = currentTime.getHours();
 
 if (currentHours > nightFrom || currentHours < nightTo) {
-  header.classList.add('header--night');
+  header.classList.add('header-night');
   button.style.backgroundColor = '#2a344b';
 } else {
   header.style.backgroundImage = '../images/day.png';

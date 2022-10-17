@@ -31,6 +31,7 @@
     margin: 0 auto 10px;
 
     @extend %input;
+
     color: $main-black;
     padding-left: 20px;
     padding-top: 8px;
@@ -45,4 +46,3 @@
     }
   }
 }
-
