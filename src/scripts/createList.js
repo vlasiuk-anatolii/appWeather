@@ -43,6 +43,11 @@ function createListDropDown(listCities) {
     item.classList.add('dropdown__item');
     list.appendChild(item);
     item.textContent = 'City not found!';
+    if (isNight()) {
+      item.classList.toggle('dropdown__item-night');
+    } else {
+      item.classList.toggle('dropdown__item');
+    }
     item.addEventListener('click', () => {
       clear();
     });
