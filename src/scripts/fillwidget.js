@@ -1,4 +1,5 @@
-const { getCelciy } = require('./celsiy');
+import getCelciy from './celsiy';
+import isNight from './isNight';
 
 const MMMM = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -14,9 +15,8 @@ function fillWidget(cityFromServer) {
     }
     const icon = document.getElementById('icon');
     const currentUrl = `url(http://openweathermap.org/img/wn/${cityFromServer.weather[0].icon}@2x.png)`;
-    const currentTime = new Date();
-    const currentHours = currentTime.getHours();
-    if (currentHours > 21 || currentHours < 6) {
+
+    if (isNight()) {
       const nightLayoutUrl = currentUrl.replace(/d(?=@)/, 'n');
       icon.style.backgroundImage = nightLayoutUrl;
     } else {
@@ -38,4 +38,4 @@ function fillWidget(cityFromServer) {
     max.textContent = getCelciy(cityFromServer.main.temp_max);
   }
 }
-module.exports = { fillWidget };
+export default fillWidget;

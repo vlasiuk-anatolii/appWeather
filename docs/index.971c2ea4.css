@@ -1,4 +1,4 @@
-.dropdown__item, .card__button, .footer__text, .faq__panel-answer, .faq__subtitle, .header__long-kind, .header__current-date, .header__min-name, .header__max-name, .header-night__long-kind, .header-night__current-date, .header-night__min-name, .header-night__max-name, .header__short-kind, .header-night__short-kind, .header__search, .header-night__search {
+.dropdown__item, .dropdown__item-night, .card__button, .footer__text, .faq__panel-answer, .faq__subtitle, .header__long-kind, .header__current-date, .header__min-name, .header__max-name, .header-night__long-kind, .header-night__current-date, .header-night__min-name, .header-night__max-name, .header__short-kind, .header-night__short-kind, .header__search, .header-night__search {
   font-family: Roboto, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -54,7 +54,7 @@ a {
   background-position: center;
 }
 
-.header--night, .header-night--night {
+.header-night, .header-night-night {
   background-image: url("night.363fae36.png");
 }
 
@@ -432,7 +432,7 @@ a {
   }
 }
 
-.dropdown__item {
+.dropdown__item, .dropdown__item-night {
   color: #212121;
   width: 100%;
   height: 38px;
@@ -443,9 +443,14 @@ a {
   transition-duration: .5s;
 }
 
-.dropdown__item:hover {
+.dropdown__item:hover, .dropdown__item-night:hover {
   color: #fff;
   background-color: #90caf9;
+}
+
+.dropdown__item-night:hover {
+  color: #fff;
+  background-color: #2a344b;
 }
 
 /*# sourceMappingURL=index.971c2ea4.css.map */

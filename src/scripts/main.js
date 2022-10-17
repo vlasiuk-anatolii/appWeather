@@ -1,10 +1,8 @@
-import { accord } from './acordion';
-import { allCities } from './allcities';
-import { getDetails } from './details';
-import { createCard } from './createCard';
-
-const nightFrom = 21;
-const nightTo = 6;
+import accord from './acordion';
+import allCities from './allcities';
+import getDetails from './details';
+import createCard from './createCard';
+import isNight from './isNight';
 
 const acc = document.getElementsByClassName('accordion');
 accord(acc, 'active-arrow');
@@ -26,10 +24,8 @@ button.addEventListener('click', () => {
   getDetails(input.value);
 });
 const header = document.getElementById('header');
-const currentTime = new Date();
-const currentHours = currentTime.getHours();
 
-if (currentHours > nightFrom || currentHours < nightTo) {
+if (isNight()) {
   header.classList.add('header-night');
   button.style.backgroundColor = '#2a344b';
 } else {

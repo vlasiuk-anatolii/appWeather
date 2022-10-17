@@ -1,6 +1,6 @@
-const { createListDropDown } = require('./createList').default;
-const { fillWidget } = require('./fillwidget');
-const { getWeather } = require('./api');
+import createListDropDown from './createList';
+import fillWidget from './fillwidget';
+import { getWeather } from './api';
 
 function getDetails(value) {
   getWeather(value)
@@ -12,4 +12,4 @@ function getDetails(value) {
       }
     });
 }
-module.exports = { getDetails };
+export default getDetails;

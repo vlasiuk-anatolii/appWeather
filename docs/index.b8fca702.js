@@ -532,28 +532,31 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"3cYfC":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _acordion = require("./acordion");
+var _acordionDefault = parcelHelpers.interopDefault(_acordion);
 var _allcities = require("./allcities");
+var _allcitiesDefault = parcelHelpers.interopDefault(_allcities);
 var _details = require("./details");
+var _detailsDefault = parcelHelpers.interopDefault(_details);
 var _createCard = require("./createCard");
-const nightFrom = 21;
-const nightTo = 6;
+var _createCardDefault = parcelHelpers.interopDefault(_createCard);
+var _isNight = require("./isNight");
+var _isNightDefault = parcelHelpers.interopDefault(_isNight);
 const acc = document.getElementsByClassName("accordion");
-(0, _acordion.accord)(acc, "active-arrow");
+(0, _acordionDefault.default)(acc, "active-arrow");
 const input = document.getElementById("search");
 input.addEventListener("keyup", (event)=>{
-    (0, _allcities.allCities)(event.target.value);
-    if (event.code === "Enter") (0, _details.getDetails)(event.target.value);
+    (0, _allcitiesDefault.default)(event.target.value);
+    if (event.code === "Enter") (0, _detailsDefault.default)(event.target.value);
 });
 const button = document.getElementById("button");
 button.addEventListener("click", ()=>{
-    (0, _allcities.allCities)(input.value);
-    (0, _details.getDetails)(input.value);
+    (0, _allcitiesDefault.default)(input.value);
+    (0, _detailsDefault.default)(input.value);
 });
 const header = document.getElementById("header");
-const currentTime = new Date();
-const currentHours = currentTime.getHours();
-if (currentHours > nightFrom || currentHours < nightTo) {
+if ((0, _isNightDefault.default)()) {
     header.classList.add("header-night");
     button.style.backgroundColor = "#2a344b";
 } else {
@@ -564,13 +567,15 @@ let saved = localStorage.getItem("obj");
 if (saved) {
     saved = JSON.parse(saved);
     saved.forEach((element)=>{
-        (0, _createCard.createCard)(element.name, element.lon, element.lat, element.country);
+        (0, _createCardDefault.default)(element.name, element.lon, element.lat, element.country);
     });
 }
 const fotterText = document.getElementById("footer-text");
 fotterText.textContent = `Vlasiuk Anatolii - ${new Date().getFullYear()}`;
 
-},{"./acordion":"2d7OK","./allcities":"h10Bt","./details":"XRDfr","./createCard":"iFwQo"}],"2d7OK":[function(require,module,exports) {
+},{"./acordion":"2d7OK","./allcities":"h10Bt","./details":"XRDfr","./createCard":"iFwQo","./isNight":"eJpkE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2d7OK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
 function accord(array, classActiveName) {
     for(let i = 0; i < array.length; i += 1)array[i].addEventListener("click", function accordion() {
         this.classList.toggle(`${classActiveName}`);
@@ -587,226 +592,9 @@ function accord(array, classActiveName) {
         }
     });
 }
-module.exports = {
-    accord
-};
+exports.default = accord;
 
-},{}],"h10Bt":[function(require,module,exports) {
-const { createListDropDown  } = require("./createList").default;
-const { clear  } = require("./clear");
-const { getCities  } = require("./api");
-function allCities(value) {
-    getCities(value).then((cityFromServer)=>{
-        clear();
-        if (cityFromServer.code === "400" || cityFromServer.count === 0) createListDropDown();
-        else createListDropDown(cityFromServer.list);
-    });
-}
-module.exports = {
-    allCities
-};
-
-},{"./createList":"bhe4Q","./clear":"7igUK","./api":"kcudQ"}],"bhe4Q":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _createCard = require("./createCard");
-var _fillwidget = require("./fillwidget");
-var _clear = require("./clear");
-var _api = require("./api");
-function createListDropDown(listCities) {
-    const listContainer = document.createElement("div");
-    listContainer.classList.add("dropdown");
-    const list = document.createElement("ul");
-    list.setAttribute("id", "list");
-    list.classList.add("dropdown__list");
-    listContainer.appendChild(list);
-    const label = document.getElementById("label-search");
-    const parentDiv = label.parentNode;
-    let item;
-    if (listCities instanceof Array) listCities.forEach((element)=>{
-        item = document.createElement("li");
-        item.classList.add("dropdown__item");
-        item.setAttribute("data", `${element.name} ${element.sys.country} ${element.id} ${element.coord.lon} ${element.coord.lat}`);
-        list.appendChild(item);
-        item.textContent = `${element.name}, ${element.sys.country}`;
-        item.addEventListener("click", ()=>{
-            (0, _api.getCurrentCity)(element.coord.lon, element.coord.lat).then((result)=>{
-                if (result) (0, _fillwidget.fillWidget)(result);
-            });
-            (0, _clear.clear)();
-            (0, _createCard.createCard)(element.name, element.coord.lon, element.coord.lat, element.sys.country);
-        });
-    });
-    else {
-        item = document.createElement("li");
-        item.classList.add("dropdown__item");
-        list.appendChild(item);
-        item.textContent = "City not found!";
-        item.addEventListener("click", ()=>{
-            (0, _clear.clear)();
-        });
-    }
-    parentDiv.insertBefore(listContainer, label);
-}
-exports.default = {
-    createListDropDown
-};
-
-},{"./createCard":"iFwQo","./fillwidget":"cqag3","./clear":"7igUK","./api":"kcudQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iFwQo":[function(require,module,exports) {
-const { fillWidget  } = require("./fillwidget");
-const { getCurrentCity  } = require("./api");
-const arrayTemp = [];
-function createCard(nameCity, lon, lat, country) {
-    const objForSave = {
-        name: nameCity,
-        lon,
-        lat,
-        country
-    };
-    const imagesContainer = document.createElement("div");
-    imagesContainer.classList.add("card");
-    imagesContainer.classList.add("cities__card");
-    const imageButtonBox = document.createElement("div");
-    imageButtonBox.classList.add("card__images");
-    const currentTime = new Date();
-    const currentHours = currentTime.getHours();
-    if (currentHours > 21 || currentHours < 6) imageButtonBox.style.backgroundColor = "#2a344b";
-    else imageButtonBox.style.backgroundColor = "#90caf9";
-    const cardButton = document.createElement("button");
-    cardButton.classList.add("card__button");
-    imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${objForSave.country})`;
-    if (nameCity) cardButton.textContent = nameCity;
-    imageButtonBox.appendChild(cardButton);
-    imagesContainer.appendChild(imageButtonBox);
-    cardButton.addEventListener("click", ()=>{
-        getCurrentCity(lon, lat).then((result)=>{
-            fillWidget(result);
-            imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${result.sys.country})`;
-            objForSave.country = `${result.sys.country}`;
-        });
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth"
-        });
-    });
-    const boxImages = document.getElementById("box-images");
-    const arrayOfCards = document.getElementsByClassName("cities__card");
-    if (arrayOfCards.length === 5) boxImages.firstElementChild.remove();
-    if (arrayTemp.length === 5) arrayTemp.shift();
-    arrayTemp.push(objForSave);
-    localStorage.setItem("obj", JSON.stringify(arrayTemp));
-    boxImages.appendChild(imagesContainer);
-}
-module.exports = {
-    createCard
-};
-
-},{"./fillwidget":"cqag3","./api":"kcudQ"}],"cqag3":[function(require,module,exports) {
-const { getCelciy  } = require("./celsiy");
-const MMMM = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-];
-function fillWidget(cityFromServer) {
-    if (cityFromServer.cod === "400") {
-        const place = document.getElementById("place");
-        place.textContent = "Type city";
-    } else {
-        const temp = document.getElementById("temp");
-        if (cityFromServer.main.temp) temp.textContent = getCelciy(cityFromServer.main.temp);
-        const icon = document.getElementById("icon");
-        const currentUrl = `url(http://openweathermap.org/img/wn/${cityFromServer.weather[0].icon}@2x.png)`;
-        const currentTime = new Date();
-        const currentHours = currentTime.getHours();
-        if (currentHours > 21 || currentHours < 6) {
-            const nightLayoutUrl = currentUrl.replace(/d(?=@)/, "n");
-            icon.style.backgroundImage = nightLayoutUrl;
-        } else {
-            const dayLayoutUrl = currentUrl.replace(/n(?=@)/, "d");
-            icon.style.backgroundImage = dayLayoutUrl;
-        }
-        const kind = document.getElementById("short-kind");
-        kind.textContent = cityFromServer.weather[0].main;
-        const kindDescription = document.getElementById("long-kind");
-        kindDescription.textContent = cityFromServer.weather[0].description;
-        const place1 = document.getElementById("place");
-        place1.textContent = `${cityFromServer.name}, ${cityFromServer.sys.country}`;
-        const date = document.getElementById("date");
-        const currentDate = new Date(cityFromServer.dt * 1000);
-        date.textContent = `${currentDate.getDate()} ${MMMM[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-        const min = document.getElementById("temp-min");
-        min.textContent = getCelciy(cityFromServer.main.temp_min);
-        const max = document.getElementById("temp-max");
-        max.textContent = getCelciy(cityFromServer.main.temp_max);
-    }
-}
-module.exports = {
-    fillWidget
-};
-
-},{"./celsiy":"g3RWi"}],"g3RWi":[function(require,module,exports) {
-function getCelciy(kelvin) {
-    const temp = Math.round(kelvin - 273) * 10 / 10;
-    if (temp > 0) return `+${temp}°C`;
-    if (temp < 0) return `-${temp}°C`;
-    return `${temp}°C`;
-}
-module.exports = {
-    getCelciy
-};
-
-},{}],"kcudQ":[function(require,module,exports) {
-async function getWeather(city) {
-    try {
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
-        return response.json();
-    } catch (error) {
-        return error;
-    }
-}
-async function getCities(city) {
-    try {
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
-        return response.json();
-    } catch (error) {
-        return error;
-    }
-}
-async function getCurrentCity(lon, lat) {
-    try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=79b60acd04707a3adf97329d89451cf2`);
-        return response.json();
-    } catch (error) {
-        return error;
-    }
-}
-module.exports = {
-    getCities,
-    getWeather,
-    getCurrentCity
-};
-
-},{}],"7igUK":[function(require,module,exports) {
-function clear() {
-    const prevList = document.getElementsByClassName("dropdown");
-    for(let i = 0; i < prevList.length; i += 1)prevList[i].remove();
-}
-module.exports = {
-    clear
-};
-
-},{}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -836,20 +624,258 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"XRDfr":[function(require,module,exports) {
-const { createListDropDown  } = require("./createList").default;
-const { fillWidget  } = require("./fillwidget");
-const { getWeather  } = require("./api");
-function getDetails(value) {
-    getWeather(value).then((result)=>{
-        if (result.code === "400") createListDropDown();
-        else fillWidget(result);
+},{}],"h10Bt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _createList = require("./createList");
+var _createListDefault = parcelHelpers.interopDefault(_createList);
+var _clear = require("./clear");
+var _clearDefault = parcelHelpers.interopDefault(_clear);
+var _api = require("./api");
+function allCities(value) {
+    (0, _api.getCities)(value).then((cityFromServer)=>{
+        (0, _clearDefault.default)();
+        if (cityFromServer.code === "400" || cityFromServer.count === 0) (0, _createListDefault.default)();
+        else (0, _createListDefault.default)(cityFromServer.list);
     });
 }
-module.exports = {
-    getDetails
-};
+exports.default = allCities;
 
-},{"./createList":"bhe4Q","./fillwidget":"cqag3","./api":"kcudQ"}]},["7age3","3cYfC"], "3cYfC", "parcelRequired296")
+},{"./createList":"bhe4Q","./clear":"7igUK","./api":"kcudQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bhe4Q":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _createCard = require("./createCard");
+var _createCardDefault = parcelHelpers.interopDefault(_createCard);
+var _fillwidget = require("./fillwidget");
+var _fillwidgetDefault = parcelHelpers.interopDefault(_fillwidget);
+var _clear = require("./clear");
+var _clearDefault = parcelHelpers.interopDefault(_clear);
+var _api = require("./api");
+var _isNight = require("./isNight");
+var _isNightDefault = parcelHelpers.interopDefault(_isNight);
+function createListDropDown(listCities) {
+    const listContainer = document.createElement("div");
+    listContainer.classList.add("dropdown");
+    const list = document.createElement("ul");
+    list.setAttribute("id", "list");
+    list.classList.add("dropdown__list");
+    listContainer.appendChild(list);
+    const label = document.getElementById("label-search");
+    const parentDiv = label.parentNode;
+    let item;
+    if (listCities instanceof Array) listCities.forEach((element)=>{
+        item = document.createElement("li");
+        item.setAttribute("data", `${element.name} ${element.sys.country} ${element.id} ${element.coord.lon} ${element.coord.lat}`);
+        list.appendChild(item);
+        item.textContent = `${element.name}, ${element.sys.country}`;
+        if ((0, _isNightDefault.default)()) item.classList.toggle("dropdown__item-night");
+        else item.classList.toggle("dropdown__item");
+        item.addEventListener("click", ()=>{
+            (0, _api.getCurrentCity)(element.coord.lon, element.coord.lat).then((result)=>{
+                if (result) (0, _fillwidgetDefault.default)(result);
+            });
+            (0, _clearDefault.default)();
+            (0, _createCardDefault.default)(element.name, element.coord.lon, element.coord.lat, element.sys.country);
+        });
+    });
+    else {
+        item = document.createElement("li");
+        item.classList.add("dropdown__item");
+        list.appendChild(item);
+        item.textContent = "City not found!";
+        item.addEventListener("click", ()=>{
+            (0, _clearDefault.default)();
+        });
+    }
+    parentDiv.insertBefore(listContainer, label);
+}
+exports.default = createListDropDown;
+
+},{"./createCard":"iFwQo","./fillwidget":"cqag3","./clear":"7igUK","./api":"kcudQ","./isNight":"eJpkE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iFwQo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _fillwidget = require("./fillwidget");
+var _fillwidgetDefault = parcelHelpers.interopDefault(_fillwidget);
+var _api = require("./api");
+var _isNight = require("./isNight");
+var _isNightDefault = parcelHelpers.interopDefault(_isNight);
+const arrayTemp = [];
+function createCard(nameCity, lon, lat, country) {
+    const objForSave = {
+        name: nameCity,
+        lon,
+        lat,
+        country
+    };
+    const imagesContainer = document.createElement("div");
+    imagesContainer.classList.add("card");
+    imagesContainer.classList.add("cities__card");
+    const imageButtonBox = document.createElement("div");
+    imageButtonBox.classList.add("card__images");
+    if ((0, _isNightDefault.default)()) imageButtonBox.style.backgroundColor = "#2a344b";
+    else imageButtonBox.style.backgroundColor = "#90caf9";
+    const cardButton = document.createElement("button");
+    cardButton.classList.add("card__button");
+    imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${objForSave.country})`;
+    if (nameCity) cardButton.textContent = nameCity;
+    imageButtonBox.appendChild(cardButton);
+    imagesContainer.appendChild(imageButtonBox);
+    cardButton.addEventListener("click", ()=>{
+        (0, _api.getCurrentCity)(lon, lat).then((result)=>{
+            (0, _fillwidgetDefault.default)(result);
+            imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${result.sys.country})`;
+            objForSave.country = `${result.sys.country}`;
+        });
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        });
+    });
+    const boxImages = document.getElementById("box-images");
+    const arrayOfCards = document.getElementsByClassName("cities__card");
+    if (arrayOfCards.length === 5) boxImages.firstElementChild.remove();
+    if (arrayTemp.length === 5) arrayTemp.shift();
+    arrayTemp.push(objForSave);
+    localStorage.setItem("obj", JSON.stringify(arrayTemp));
+    boxImages.appendChild(imagesContainer);
+}
+exports.default = createCard;
+
+},{"./fillwidget":"cqag3","./api":"kcudQ","./isNight":"eJpkE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cqag3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _celsiy = require("./celsiy");
+var _celsiyDefault = parcelHelpers.interopDefault(_celsiy);
+var _isNight = require("./isNight");
+var _isNightDefault = parcelHelpers.interopDefault(_isNight);
+const MMMM = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+function fillWidget(cityFromServer) {
+    if (cityFromServer.cod === "400") {
+        const place = document.getElementById("place");
+        place.textContent = "Type city";
+    } else {
+        const temp = document.getElementById("temp");
+        if (cityFromServer.main.temp) temp.textContent = (0, _celsiyDefault.default)(cityFromServer.main.temp);
+        const icon = document.getElementById("icon");
+        const currentUrl = `url(http://openweathermap.org/img/wn/${cityFromServer.weather[0].icon}@2x.png)`;
+        if ((0, _isNightDefault.default)()) {
+            const nightLayoutUrl = currentUrl.replace(/d(?=@)/, "n");
+            icon.style.backgroundImage = nightLayoutUrl;
+        } else {
+            const dayLayoutUrl = currentUrl.replace(/n(?=@)/, "d");
+            icon.style.backgroundImage = dayLayoutUrl;
+        }
+        const kind = document.getElementById("short-kind");
+        kind.textContent = cityFromServer.weather[0].main;
+        const kindDescription = document.getElementById("long-kind");
+        kindDescription.textContent = cityFromServer.weather[0].description;
+        const place1 = document.getElementById("place");
+        place1.textContent = `${cityFromServer.name}, ${cityFromServer.sys.country}`;
+        const date = document.getElementById("date");
+        const currentDate = new Date(cityFromServer.dt * 1000);
+        date.textContent = `${currentDate.getDate()} ${MMMM[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+        const min = document.getElementById("temp-min");
+        min.textContent = (0, _celsiyDefault.default)(cityFromServer.main.temp_min);
+        const max = document.getElementById("temp-max");
+        max.textContent = (0, _celsiyDefault.default)(cityFromServer.main.temp_max);
+    }
+}
+exports.default = fillWidget;
+
+},{"./celsiy":"g3RWi","./isNight":"eJpkE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g3RWi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function getCelciy(kelvin) {
+    const temp = Math.round(kelvin - 273) * 10 / 10;
+    if (temp > 0) return `+${temp}°C`;
+    if (temp < 0) return `-${temp}°C`;
+    return `${temp}°C`;
+}
+exports.default = getCelciy;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eJpkE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const nightFrom = 21;
+const nightTo = 6;
+function isNight() {
+    const currentTime = new Date();
+    const currentHours = currentTime.getHours();
+    if (currentHours > nightFrom || currentHours < nightTo) return true;
+    return false;
+}
+exports.default = isNight;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kcudQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getWeather", ()=>getWeather);
+parcelHelpers.export(exports, "getCities", ()=>getCities);
+parcelHelpers.export(exports, "getCurrentCity", ()=>getCurrentCity);
+async function getWeather(city) {
+    try {
+        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
+        return response.json();
+    } catch (error) {
+        return error;
+    }
+}
+async function getCities(city) {
+    try {
+        const response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
+        return response.json();
+    } catch (error) {
+        return error;
+    }
+}
+async function getCurrentCity(lon, lat) {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=79b60acd04707a3adf97329d89451cf2`);
+        return response.json();
+    } catch (error) {
+        return error;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7igUK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function clear() {
+    const prevList = document.getElementsByClassName("dropdown");
+    for(let i = 0; i < prevList.length; i += 1)prevList[i].remove();
+}
+exports.default = clear;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"XRDfr":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _createList = require("./createList");
+var _createListDefault = parcelHelpers.interopDefault(_createList);
+var _fillwidget = require("./fillwidget");
+var _fillwidgetDefault = parcelHelpers.interopDefault(_fillwidget);
+var _api = require("./api");
+function getDetails(value) {
+    (0, _api.getWeather)(value).then((result)=>{
+        if (result.code === "400") (0, _createListDefault.default)();
+        else (0, _fillwidgetDefault.default)(result);
+    });
+}
+exports.default = getDetails;
+
+},{"./createList":"bhe4Q","./fillwidget":"cqag3","./api":"kcudQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["7age3","3cYfC"], "3cYfC", "parcelRequired296")
 
 //# sourceMappingURL=index.b8fca702.js.map

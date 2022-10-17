@@ -1,7 +1,8 @@
-import { createCard } from './createCard';
-import { fillWidget } from './fillwidget';
-import { clear } from './clear';
+import createCard from './createCard';
+import fillWidget from './fillwidget';
+import clear from './clear';
 import { getCurrentCity } from './api';
+import isNight from './isNight';
 
 function createListDropDown(listCities) {
   const listContainer = document.createElement('div');
@@ -17,10 +18,15 @@ function createListDropDown(listCities) {
   if (listCities instanceof Array) {
     listCities.forEach((element) => {
       item = document.createElement('li');
-      item.classList.add('dropdown__item');
       item.setAttribute('data', `${element.name} ${element.sys.country} ${element.id} ${element.coord.lon} ${element.coord.lat}`);
       list.appendChild(item);
       item.textContent = `${element.name}, ${element.sys.country}`;
+
+      if (isNight()) {
+        item.classList.toggle('dropdown__item-night');
+      } else {
+        item.classList.toggle('dropdown__item');
+      }
       item.addEventListener('click', () => {
         getCurrentCity(element.coord.lon, element.coord.lat)
           .then((result) => {
@@ -44,4 +50,4 @@ function createListDropDown(listCities) {
 
   parentDiv.insertBefore(listContainer, label);
 }
-export default { createListDropDown };
+export default createListDropDown;

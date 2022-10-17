@@ -10,4 +10,5 @@ function getCelciy(kelvin) {
 
   return `${temp}°C`;
 }
-module.exports = { getCelciy };
+
+export default getCelciy;

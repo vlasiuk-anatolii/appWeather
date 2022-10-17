@@ -1,6 +1,6 @@
-const { createListDropDown } = require('./createList').default;
-const { clear } = require('./clear');
-const { getCities } = require('./api');
+import createListDropDown from './createList';
+import clear from './clear';
+import { getCities } from './api';
 
 function allCities(value) {
   getCities(value)
@@ -13,4 +13,4 @@ function allCities(value) {
       }
     });
 }
-module.exports = { allCities };
+export default allCities;

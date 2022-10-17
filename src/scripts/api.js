@@ -1,4 +1,4 @@
-async function getWeather(city) {
+export async function getWeather(city) {
   try {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
 
@@ -8,7 +8,7 @@ async function getWeather(city) {
   }
 }
 
-async function getCities(city) {
+export async function getCities(city) {
   try {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
 
@@ -18,7 +18,7 @@ async function getCities(city) {
   }
 }
 
-async function getCurrentCity(lon, lat) {
+export async function getCurrentCity(lon, lat) {
   try {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=79b60acd04707a3adf97329d89451cf2`);
 
@@ -27,9 +27,3 @@ async function getCurrentCity(lon, lat) {
     return error;
   }
 }
-
-module.exports = {
-  getCities,
-  getWeather,
-  getCurrentCity,
-};

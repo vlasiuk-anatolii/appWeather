@@ -6,4 +6,4 @@ function clear() {
   }
 }
 
-module.exports = { clear };
+export default clear;

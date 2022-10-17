@@ -18,5 +18,4 @@ function accord(array, classActiveName) {
     });
   }
 }
-
-module.exports = { accord };
+export default accord;

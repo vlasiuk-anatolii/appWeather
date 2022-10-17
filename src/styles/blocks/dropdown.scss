@@ -27,7 +27,8 @@
     }
   }
 
-  &__item {
+  &__item,
+  &__item-night {
     margin: 0 auto 10px;
 
     @extend %input;
@@ -44,5 +45,10 @@
       background-color: $main-blue;
       color: $bg-main;
     }
+  }
+
+  &__item-night:hover {
+    background-color: $main-nightblue;
+    color: $bg-main;
   }
 }

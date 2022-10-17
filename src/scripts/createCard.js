@@ -1,5 +1,6 @@
-const { fillWidget } = require('./fillwidget');
-const { getCurrentCity } = require('./api');
+import fillWidget from './fillwidget';
+import { getCurrentCity } from './api';
+import isNight from './isNight';
 
 const arrayTemp = [];
 
@@ -15,10 +16,8 @@ function createCard(nameCity, lon, lat, country) {
   imagesContainer.classList.add('cities__card');
   const imageButtonBox = document.createElement('div');
   imageButtonBox.classList.add('card__images');
-  const currentTime = new Date();
-  const currentHours = currentTime.getHours();
 
-  if (currentHours > 21 || currentHours < 6) {
+  if (isNight()) {
     imageButtonBox.style.backgroundColor = '#2a344b';
   } else {
     imageButtonBox.style.backgroundColor = '#90caf9';
@@ -60,4 +59,4 @@ function createCard(nameCity, lon, lat, country) {
 
   boxImages.appendChild(imagesContainer);
 }
-module.exports = { createCard };
+export default createCard;
