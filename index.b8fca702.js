@@ -533,8 +533,8 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"3cYfC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _acordion = require("./acordion");
-var _acordionDefault = parcelHelpers.interopDefault(_acordion);
+var _accordion = require("./accordion");
+var _accordionDefault = parcelHelpers.interopDefault(_accordion);
 var _allcities = require("./allcities");
 var _allcitiesDefault = parcelHelpers.interopDefault(_allcities);
 var _details = require("./details");
@@ -544,7 +544,7 @@ var _createCardDefault = parcelHelpers.interopDefault(_createCard);
 var _isNight = require("./isNight");
 var _isNightDefault = parcelHelpers.interopDefault(_isNight);
 const acc = document.getElementsByClassName("accordion");
-(0, _acordionDefault.default)(acc, "active-arrow");
+(0, _accordionDefault.default)(acc, "active-arrow");
 const input = document.getElementById("search");
 input.addEventListener("keyup", (event)=>{
     (0, _allcitiesDefault.default)(event.target.value);
@@ -573,58 +573,7 @@ if (saved) {
 const fotterText = document.getElementById("footer-text");
 fotterText.textContent = `Vlasiuk Anatolii - ${new Date().getFullYear()}`;
 
-},{"./acordion":"2d7OK","./allcities":"h10Bt","./details":"XRDfr","./createCard":"iFwQo","./isNight":"eJpkE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2d7OK":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function accord(array, classActiveName) {
-    for(let i = 0; i < array.length; i += 1)array[i].addEventListener("click", function accordion() {
-        this.classList.toggle(`${classActiveName}`);
-        const kind = this.classList[0].match(/answer\d/);
-        const panel = document.getElementById(kind[0]);
-        const section = document.getElementById(`question${kind[0][kind[0].length - 1]}`);
-        if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-            section.style.boxShadow = "none";
-        } else {
-            panel.style.maxHeight = `${panel.scrollHeight}px`;
-            section.style.transitionDuration = ".5s";
-            section.style.boxShadow = "0px -1px 62px -6px rgba(144,202,249,1)";
-        }
-    });
-}
-exports.default = accord;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"h10Bt":[function(require,module,exports) {
+},{"./allcities":"h10Bt","./details":"XRDfr","./createCard":"iFwQo","./isNight":"eJpkE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./accordion":"67NUV"}],"h10Bt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _createList = require("./createList");
@@ -809,7 +758,37 @@ function getCelciy(kelvin) {
 }
 exports.default = getCelciy;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eJpkE":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"eJpkE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const nightFrom = 21;
@@ -878,6 +857,28 @@ function getDetails(value) {
 }
 exports.default = getDetails;
 
-},{"./createList":"bhe4Q","./fillwidget":"cqag3","./api":"kcudQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["7age3","3cYfC"], "3cYfC", "parcelRequired296")
+},{"./createList":"bhe4Q","./fillwidget":"cqag3","./api":"kcudQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"67NUV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function accord(array, classActiveName) {
+    for(let i = 0; i < array.length; i += 1)array[i].addEventListener("click", function accordion() {
+        this.classList.toggle(`${classActiveName}`);
+        const kind = this.classList[0].match(/answer\d/);
+        console.log(kind);
+        const panel = document.getElementById(kind[0]);
+        const section = document.getElementById(`question${kind[0][kind[0].length - 1]}`);
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            section.style.boxShadow = "none";
+        } else {
+            panel.style.maxHeight = `${panel.scrollHeight}px`;
+            section.style.transitionDuration = ".5s";
+            section.style.boxShadow = "0px -1px 62px -6px rgba(144,202,249,1)";
+        }
+    });
+}
+exports.default = accord;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["7age3","3cYfC"], "3cYfC", "parcelRequired296")
 
 //# sourceMappingURL=index.b8fca702.js.map
