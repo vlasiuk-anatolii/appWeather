@@ -40,11 +40,11 @@
     transition-duration: $transition-duration;
     width: 100%;
     height: 38px;
+  }
 
-    &:hover {
-      background-color: $main-blue;
-      color: $bg-main;
-    }
+  &__item:hover {
+    background-color: $main-blue;
+    color: $bg-main;
   }
 
   &__item-night:hover {

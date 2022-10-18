@@ -1,11 +1,8 @@
-import accord from './acordion';
+import accord from './accordion';
 import allCities from './allcities';
 import getDetails from './details';
 import createCard from './createCard';
 import isNight from './isNight';
-
-const acc = document.getElementsByClassName('accordion');
-accord(acc, 'active-arrow');
 
 const input = document.getElementById('search');
 
@@ -40,6 +37,9 @@ if (saved) {
     createCard(element.name, element.lon, element.lat, element.country);
   });
 }
+
+const acc = document.getElementsByClassName('accordion');
+accord(acc, 'active-arrow');
 
 const fotterText = document.getElementById('footer-text');
 fotterText.textContent = `Vlasiuk Anatolii - ${new Date().getFullYear()}`;

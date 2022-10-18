@@ -40,7 +40,6 @@ function createListDropDown(listCities) {
     });
   } else {
     item = document.createElement('li');
-    item.classList.add('dropdown__item');
     list.appendChild(item);
     item.textContent = 'City not found!';
     if (isNight()) {
