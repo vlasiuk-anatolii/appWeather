@@ -2,6 +2,9 @@
   margin: 20px;
 
   &__images {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 220px;
     height: 220px;
     background-color: $main-powderblue;
@@ -12,15 +15,18 @@
     border: 1px solid #2a344b;
   }
 
+  &__image {
+    margin: 20 auto;
+    border-radius: 15px;
+    width: 90%;
+  }
+
   &__button {
-    position: relative;
-
+    
     @extend %input;
-
+    margin: 0 auto;
     width: 200px;
     height: 36px;
-    top: 172px;
-    left: 9px;
     background-color: $bg-main;
     border-radius: 50px;
     margin-bottom: 17px;
