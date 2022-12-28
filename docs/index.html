@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="page">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="icon" href="./favicon.173350fe.jpg">
+    <link rel="stylesheet" href="./index.971c2ea4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <script src="./index.b8fca702.js" defer=""></script>
+  </head>
+  <body class="page">
+    <header id="header" class="header">
+      <div class="header__info-box">
+        <label id="label-search" for="search" class="header__label">
+          <input id="search" name="search" type="text" class="header__search" placeholder="Start typing to search..." required="">
+          <div id="button" type="button" class="header__button">
+          </div>
+        </label>
+        <div class="header__info-panel">
+          <div class="header__box-icon-text">
+            <div id="icon" class="header__icons">
+            </div>
+            <div class="header__text-info">
+              <div class="header__box-temp-kind">
+                <h2 id="temp" class="header__current-temp">0°C</h2>
+                <p id="short-kind" class="header__short-kind"></p>
+                <p id="long-kind" class="header__long-kind"></p>
+              </div>
+              <div class="header__box-place-date">
+                <h2 id="place" class="header__current-place">You should choose a city</h2>
+                <p id="date" class="header__current-date"></p>
+              </div>
+            </div>
+          </div>
+            
+          <div class="header__hor-divider">
+          </div>
+        
+          <div class="header__box-min-max">
+            <div class="header__box-min">
+              <p class="header__min-name">Min</p>
+              <h2 id="temp-min" class="header__min-temp">0°C</h2>
+            </div>
+            
+            <div class="header__ver-divider">
+            </div>
+  
+            <div class="header__box-max">
+              <p class="header__max-name">Max</p>
+              <h2 id="temp-max" class="header__max-temp">0°C</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="cities">
+        <div class="cities__box">
+          <h1 class="cities__title">
+            Recently you checked <br> weather in the cities:
+          </h1>
+          <div id="box-images" class="cities__box-images">
+          </div>
+        </div>
+      </section>
+
+      <section class="faq">
+        <div class="faq__box">
+          <h1 class="faq__title">
+            Frequently Asked Questions
+          </h1>
+          
+          <div class="faq__box-questions">
+            <div id="question1" class="faq__question">
+              <div class="faq__subtitle">
+                Question 1
+                <div class="answer1 faq__arrow_box accordion"></div>
+              </div>
+              <div id="answer1" class="faq__panel-answer">
+                But I must explain to you how all this mistaken idea of
+                denouncing pleasure and praising pain was born and I will
+                give you a complete account of the system, and expound the
+                actual teachings of the great explorer of the truth, the
+                master-builder of human happiness. No one rejects, dislikes,
+                or avoids pleasure itself, because it is pleasure, but because
+                those who do not know how to pursue pleasure rationally encounter
+                consequences that are extremely painful.
+              </div>
+            </div>
+            
+            <div id="question2" class="faq__question">
+              <div class="faq__subtitle">
+                Question 2
+                <div class="answer2 faq__arrow_box accordion"></div>
+              </div>
+              <div id="answer2" class="faq__panel-answer">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Ut omnis sunt eum, aperiam vero, minima veritatis, 
+                dolores accusamus iusto consequuntur nobis nihil quis 
+                assumenda quaerat praesentium aut labore perferendis ex!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Libero, id. Officiis eius exercitationem voluptates. 
+                Consectetur quidem, autem magni minima nemo dolor architecto 
+                ipsa molestiae quasi rerum ut aliquid reprehenderit deserunt.
+              </div>
+            </div>
+            
+            <div id="question3" class="faq__question">
+              <div class="faq__subtitle">
+                Question 3
+                <div class="answer3 faq__arrow_box accordion"></div>
+              </div>
+              <div id="answer3" class="faq__panel-answer">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Ut omnis sunt eum, aperiam vero, minima veritatis, 
+                dolores accusamus iusto consequuntur nobis nihil quis 
+                assumenda quaerat praesentium aut labore perferendis ex!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Libero, id. Officiis eius exercitationem voluptates. 
+                Consectetur quidem, autem magni minima nemo dolor architecto 
+                ipsa molestiae quasi rerum ut aliquid reprehenderit deserunt.
+              </div>
+            </div>
+            
+            <div id="question4" class="faq__question">
+              <div class="faq__subtitle">
+                Question 4
+                <div class="answer4 faq__arrow_box accordion"></div>
+              </div>
+              <div id="answer4" class="faq__panel-answer">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Ut omnis sunt eum, aperiam vero, minima veritatis, 
+                dolores accusamus iusto consequuntur nobis nihil quis 
+                assumenda quaerat praesentium aut labore perferendis ex!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Libero, id. Officiis eius exercitationem voluptates. 
+                Consectetur quidem, autem magni minima nemo dolor architecto 
+                ipsa molestiae quasi rerum ut aliquid reprehenderit deserunt.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p id="footer-text" class="footer__text">Vlasiuk Anatolii - 2021</p>
+    </footer>
+  </body>
+</html>
