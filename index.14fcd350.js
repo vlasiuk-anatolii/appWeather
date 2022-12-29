@@ -87,7 +87,7 @@ var $83750d83c99e0499$export$2e2bcd8739ae039 = $83750d83c99e0499$var$fillWidget;
 
 async function $50b9e281f26da31a$export$ce1081f0c9899666(city) {
     try {
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
         return response.json();
     } catch (error) {
         return error;
@@ -95,7 +95,7 @@ async function $50b9e281f26da31a$export$ce1081f0c9899666(city) {
 }
 async function $50b9e281f26da31a$export$72dee2bbe2e51046(city) {
     try {
-        const response = await fetch(`http://api.openweathermap.org/data/2.5/find?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/find?q=${city}&APPID=79b60acd04707a3adf97329d89451cf2`);
         return response.json();
     } catch (error) {
         return error;
@@ -269,4 +269,4 @@ const $f9d83769637380d8$var$fotterText = document.getElementById("footer-text");
 $f9d83769637380d8$var$fotterText.textContent = `Vlasiuk Anatolii - ${new Date().getFullYear()}`;
 
 
-//# sourceMappingURL=index.e4678ce0.js.map
+//# sourceMappingURL=index.14fcd350.js.map
