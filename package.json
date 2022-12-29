@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel ./src/index.html --open",
+    "clean": "rm -rf dist/",
     "lint:html": "linthtml ./src/index.html",
     "lint:css": "stylelint **/*.scss",
     "lint:js": "eslint ./src",
-    "build": "parcel build --public-url ./ ./src/index.html --dist-dir dist",
+    "build": "npm run clean && parcel build src/index.html --no-optimize --target web",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
+  },
+  "web": "./dist/index.html",
+  "targets": {
+    "web": {
+      "context": "browser",
+      "publicUrl": "./"
+    }
   },
   "keywords": [],
   "author": "",
