@@ -16,7 +16,10 @@ function createCard(nameCity, lon, lat, country) {
   imagesContainer.classList.add('cities__card');
   const imageButtonBox = document.createElement('div');
   imageButtonBox.classList.add('card__images');
-
+  const imageFlag = document.createElement('img');
+  imageButtonBox.appendChild(imageFlag);
+  imageFlag.classList.add('card__image');
+  imageFlag.setAttribute('crossorigin', 'anonymous');
   if (isNight()) {
     imageButtonBox.style.backgroundColor = '#2a344b';
   } else {
@@ -25,7 +28,8 @@ function createCard(nameCity, lon, lat, country) {
 
   const cardButton = document.createElement('button');
   cardButton.classList.add('card__button');
-  imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${objForSave.country})`;
+  imageFlag.setAttribute('src', `https://countryflagsapi.com/svg/${objForSave.country}`);
+  // imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${objForSave.country})`;
   if (nameCity) {
     cardButton.textContent = nameCity;
   }
@@ -35,7 +39,8 @@ function createCard(nameCity, lon, lat, country) {
     getCurrentCity(lon, lat)
       .then((result) => {
         fillWidget(result);
-        imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${result.sys.country})`;
+        imageFlag.setAttribute('src', `https://countryflagsapi.com/svg/${result.sys.country}`);
+        // imageButtonBox.style.backgroundImage = `url(https://countryflagsapi.com/svg/${result.sys.country})`;
         objForSave.country = `${result.sys.country}`;
       });
     window.scrollTo({

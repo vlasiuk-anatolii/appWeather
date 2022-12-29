@@ -3,26 +3,33 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel ./src/index.html --open",
+    "clean": "rm -rf dist/",
     "lint:html": "linthtml ./src/index.html",
     "lint:css": "stylelint **/*.scss",
     "lint:js": "eslint ./src",
-    "build": "parcel build --public-url ./ ./src/index.html --dist-dir dist",
+    "build": "npm run clean && parcel build src/index.html --no-optimize --target web",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
+  },
+  "web": "./dist/index.html",
+  "targets": {
+    "web": {
+      "context": "browser",
+      "publicUrl": "./"
+    }
   },
   "keywords": [],
   "author": "Anatolii Vlasiuk",
   "license": "ISC",
   "devDependencies": {
     "@linthtml/linthtml": "^0.9.3",
-    "@parcel/transformer-sass": "^2.7.0",
+    "@parcel/transformer-sass": "^2.8.2",
     "eslint": "^8.25.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "gh-pages": "^4.0.0",
-    "parcel": "^2.7.0",
+    "parcel": "^2.8.2",
     "stylelint": "^14.14.0",
     "stylelint-config-standard-scss": "^5.0.0"
   }
